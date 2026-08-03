@@ -7,23 +7,13 @@ workflows:
       java: 17
 
     scripts:
-      - echo "=== DOSSIER COURANT ==="
-      - pwd
-      - ls -la
-      - ls -la android
-
-      - npm install
+      - npm ci
       - npm run build
-
       - npx cap sync android
 
-      - cd android
-
-      - echo "=== CONTENU ANDROID ==="
-      - pwd
-      - ls -la
-
-      - ./gradlew assembleDebug
+      - test -f android/gradlew
+      - chmod +x android/gradlew
+      - ./android/gradlew -p android assembleDebug
 
     artifacts:
       - android/app/build/outputs/apk/debug/app-debug.apk
