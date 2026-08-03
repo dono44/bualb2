@@ -6,8 +6,15 @@ workflows:
       node: 22
       java: 17
 
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+
     scripts:
-      - npm install
+      - npm ci || npm install
       - npm run build
       - npx cap sync android
       - cd android
