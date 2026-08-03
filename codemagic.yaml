@@ -1,6 +1,6 @@
 workflows:
   android-apk:
-    name: Build Android APK
+    name: Android APK
 
     environment:
       node: 22
@@ -14,11 +14,10 @@ workflows:
           include: true
 
     scripts:
-      - npm ci || npm install
+      - npm install
       - npm run build
       - npx cap sync android
       - cd android
-      - chmod +x gradlew
       - ./gradlew assembleDebug
 
     artifacts:
