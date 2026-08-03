@@ -3,13 +3,12 @@ workflows:
     name: Build Android APK
 
     environment:
-      node: 20
+      node: 22
       java: 17
 
     scripts:
       - npm install
       - npm run build
-      - npm install @capacitor/core @capacitor/cli @capacitor/android
       - npx cap sync android
       - cd android
       - chmod +x gradlew
