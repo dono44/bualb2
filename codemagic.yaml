@@ -4,16 +4,34 @@ workflows:
 
     environment:
       node: 22
-      java: 17
+      java: 21
+
+    triggering:
+      events:
+        - push
 
     scripts:
+      - echo "=== ENV ==="
+      - java -version
+      - node -v
+      - npm -v
+
       - npm ci
       - npm run build
+
       - npx cap sync android
 
       - test -f android/gradlew
       - chmod +x android/gradlew
-      - ./android/gradlew -p android assembleDebug
+
+      - ./android/gradlew -p android clean
+      - ./android/gradlew -p android assembleDebug --stacktrace
 
     artifacts:
       - android/app/build/outputs/apk/debug/app-debug.apk
+
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+        - ~/.gradle/wrapper
+        - node_modules
