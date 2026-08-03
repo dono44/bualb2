@@ -1,6 +1,6 @@
 workflows:
   android-apk:
-    name: Android APK
+    name: Build Android APK
 
     environment:
       node: 22
@@ -9,15 +9,21 @@ workflows:
     triggering:
       events:
         - push
-      branch_patterns:
-        - pattern: main
-          include: true
+        - pull_request
 
     scripts:
-      - npm install
+      - npm ci
       - npm run build
       - npx cap sync android
+
+      # Vérification des fichiers
+      - pwd
+      - ls -la
+      - ls -la android
+
+      # Compilation Android
       - cd android
+      - ls -la
       - ./gradlew assembleDebug
 
     artifacts:
