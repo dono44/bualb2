@@ -1,6 +1,0 @@
-{
-  "name": "DualAudio Player - Double Sortie Bluetooth Android",
-  "description": "Lecteur audio multi-diffusion permettant d'importer toutes les musiques de votre téléphone Android et de les diffuser simultanément sur deux casques ou enceintes Bluetooth.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
